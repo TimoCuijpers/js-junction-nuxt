@@ -1,4 +1,5 @@
-import axios from 'axios';
+// const axios = useSanctumAppConfig();
+// import axios from 'axios';
 
 export default class Response {
     constructor () {
@@ -33,14 +34,14 @@ export default class Response {
         return this._axiosResponse !== null;
     }
 
-    /**
-     * Check whether the request was cancelled.
-     *
-     * @returns {boolean}
-     */
-    get isCancelled () {
-        return axios.isCancel(this._axiosError);
-    }
+    // /**
+    //  * Check whether the request was cancelled.
+    //  *
+    //  * @returns {boolean}
+    //  */
+    // get isCancelled () {
+    //     return axios.isCancel(this._axiosError);
+    // }
 
     /**
      * @returns {Number} The HTTP response status code.

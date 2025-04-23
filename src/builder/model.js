@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Accessors from './properties/accessors';
 import Attributes from './properties/attributes';
 import Counts from './properties/counts';

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Appends from './appends';
 import HiddenFields from './hiddenFields';
 

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Model from './model';
 
 export default class Caster {

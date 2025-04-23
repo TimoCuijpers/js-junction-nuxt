@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import Request from './request';
 import Batch from './batch';
-import axios from 'axios';
+// import axios from 'axios';
 
 import responseEventsMixin from './mixins/responseEventsMixin';
 
@@ -9,11 +10,11 @@ import responseEventsMixin from './mixins/responseEventsMixin';
  */
 export default class Api {
     constructor () {
-        this.setHeader('X-Requested-With', 'XMLHttpRequest');
+        // this.setHeader('X-Requested-With', 'XMLHttpRequest');
 
         this._requests = [];
 
-        this.host('/').suffix('');
+        this.host('http://localhost:8080').suffix('');
 
         this._initResponseEvents();
     }
@@ -145,40 +146,40 @@ export default class Api {
         this.removeHeader('X-CSRF-TOKEN');
     }
 
-    /**
-     * @param {string} key
-     * @param {string} value
-     */
-    setHeader (key, value) {
-        axios.defaults.headers.common[key] = value;
-    }
+    // /**
+    //  * @param {string} key
+    //  * @param {string} value
+    //  */
+    // setHeader (key, value) {
+    //     useFetch().defaults.headers.common[key] = value;
+    // }
+    //
+    // /**
+    //  * @param {string} key
+    //  */
+    // removeHeader (key) {
+    //     delete useFetch().defaults.headers.common[key];
+    // }
 
-    /**
-     * @param {string} key
-     */
-    removeHeader (key) {
-        delete axios.defaults.headers.common[key];
-    }
-
-    /**
-     * @param {function(Response)} onSuccess
-     * @param {function(Error)} onError
-     *
-     * @returns {this}
-     */
-    responseInterceptors (onSuccess = () => {}, onError = () => {}) {
-        axios.interceptors.response.use((response) => {
-            onSuccess(response);
-
-            return response;
-        }, (error) => {
-            onError(error);
-
-            return Promise.reject(error);
-        });
-
-        return this;
-    }
+    // /**
+    //  * @param {function(Response)} onSuccess
+    //  * @param {function(Error)} onError
+    //  *
+    //  * @returns {this}
+    //  */
+    // responseInterceptors (onSuccess = () => {}, onError = () => {}) {
+    //     useFetch().interceptors.response.use((response) => {
+    //         onSuccess(response);
+    //
+    //         return response;
+    //     }, (error) => {
+    //         onError(error);
+    //
+    //         return Promise.reject(error);
+    //     });
+    //
+    //     return this;
+    // }
 }
 
 Object.assign(Api.prototype, responseEventsMixin);

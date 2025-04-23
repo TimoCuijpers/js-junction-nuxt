@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Action from './request/action';
 import Connection from './connection';
 import Filters from './filters/filters';

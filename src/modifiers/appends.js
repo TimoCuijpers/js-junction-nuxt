@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Modifier from './modifier';
 import Format from '../utilities/format';
 

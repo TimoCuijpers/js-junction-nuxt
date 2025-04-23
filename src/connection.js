@@ -1,5 +1,6 @@
+import _ from 'lodash';
 import Response from './response';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default class Connection {
     constructor () {
@@ -73,22 +74,22 @@ export default class Connection {
             signal: (this._abortController = new AbortController()).signal,
         };
 
-        const request = axios(Object.assign(config, this._config));
+        const request = useFetch(url, (Object.assign(config, this._config)));
         const response = new Response();
 
-        await request
-            .then((axiosResponse) => {
-                response.setAxiosResponse(axiosResponse);
-            })
-            .catch((axiosError) => {
-                this.failed = true;
+        // await request
+        //     .then((axiosResponse) => {
+        //         response.setAxiosResponse(axiosResponse);
+        //     })
+        //     .catch((axiosError) => {
+        //         this.failed = true;
+        //
+        //         response.setAxiosError(axiosError);
+        //     })
+        //     .finally(() => {
+        //         this.running = false;
+        //     });
 
-                response.setAxiosError(axiosError);
-            })
-            .finally(() => {
-                this.running = false;
-            });
-
-        return response;
+        return request;
     }
 }
