@@ -1,0 +1,53 @@
+/**
+ * @implements {Property}
+ */
+export default class Relations {
+    /**
+     * @param {Model} model Instance of the model.
+     */
+    constructor(model: any);
+    /**
+     * @param {Model} model
+     * @param {Object} json.
+     */
+    fromJson(model: any, json: any): void;
+    /**
+     * @param {Model} model
+     *
+     * @return {Object} The attributes casted to a json object.
+     */
+    toJson(model: any): {};
+    /**
+     * @param {Model} model
+     * @param {string} relation
+     *
+     * @returns {*} The value of the relation.
+     */
+    get(model: any, relation: any): any;
+    /**
+     * @param {Model} model
+     * @param {string|Object} relation
+     * @param {*} value
+     *
+     * @returns {Relations}
+     */
+    set(model: any, relation: any, value?: null): this;
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    static _getCastedFromJsonValue(value: any, options: any): any;
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    static _getCastedToJsonValue(value: any, options: any): any;
+}

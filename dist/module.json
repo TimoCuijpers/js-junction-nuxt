@@ -1,0 +1,12 @@
+{
+  "name": "js-junction-nuxt",
+  "configKey": "jsJunctionNuxt",
+  "dependsOn": [
+    "nuxt-auth-sanctum"
+  ],
+  "version": "0.0.1",
+  "builder": {
+    "@nuxt/module-builder": "0.8.4",
+    "unbuild": "unknown"
+  }
+}

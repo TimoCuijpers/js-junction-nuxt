@@ -3,42 +3,44 @@
   "type": "module",
   "version": "0.0.1",
   "description": "This project allows you to easily consume API's built with Junction.",
-  "main": "./dist/module.mjs",
-  "types": "./dist/module.d.ts",
-  "scripts": {
-    "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch",
-    "prod": "webpack",
-    "build": "unbuild --config unbuild.config.ts --node-loader ts-node/esm"
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    },
+    "./builder/*": {
+      "import": "./dist/runtime/builder/*.js",
+      "types": "./dist/runtime/builder/*.d.ts"
+    }
   },
-  "author": "Robin",
+  "main": "./dist/module.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build"
+  },
+  "author": "Timo",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@nuxt/kit": "^3.16.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
-    "babel-polyfill": "^6.26.0",
+    "@nuxt/module-builder": "latest",
+    "@types/lodash": "^4.17.16",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
-    "unbuild": "^3.5.0",
-    "webpack": "^5.77.0",
-    "webpack-cli": "^4.9.0"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "axios": "^1.3.0",
+    "@nuxt/kit": "latest",
     "lodash": "^4.17.20"
   },
   "overrides": {
     "globby": "13.1.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "githttps://github.com/weapnl/js-junction.git"
-  },
-  "bugs": {
-    "url": "https://github.com/weapnl/js-junction/issues"
-  },
-  "homepage": "https://github.com/weapnl/js-junction#readme"
+  }
 }

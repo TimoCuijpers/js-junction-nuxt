@@ -1,16 +1,12 @@
 import { defineNuxtPlugin } from '#app'
-import Api from '../api'
-import Model from "../builder/model";
+import Model from './builder/model'
+export default defineNuxtPlugin((nuxtApp) => {
+  const testJunction = 'testJunction'
 
-// maak één enkele instance
-const api = new Api()
-
-api.host('http://localhost:8000/')
-
-export default defineNuxtPlugin({
-  dependsOn: ['nuxt-auth-sanctum'],
-  provide: {
-    api,
-    Model
-  },
+ return {
+   provide: {
+     Model,
+     testJunction
+   }
+ }
 })

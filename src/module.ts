@@ -1,4 +1,4 @@
-import {defineNuxtModule, createResolver, addPlugin, addImports} from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addPlugin, addImportsDir, addTypeTemplate } from "@nuxt/kit";
 
 export interface ModuleOptions {
   /* hier alle opties die je module later krijgt */
@@ -8,25 +8,23 @@ export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'js-junction-nuxt',
     configKey: 'jsJunctionNuxt',
+    dependsOn: ['nuxt-auth-sanctum']
   },
   defaults: {
     /* default‐opties */
   },
   setup (options, nuxt) {
-    const { resolve } = createResolver(import.meta.url)
+    const resolver = createResolver(import.meta.url)
 
-    // transpile je fork als dat nodig is:
-    nuxt.options.build.transpile.push('js-junction-nuxt')
+    nuxt.options.build.transpile.push(resolver.resolve('./runtime'))
 
-    addImports({
-      name: 'useApi',
-      as: 'useApi',
-      from: resolve('./runtime/composables/useApi'),
-    })
+    addImportsDir(resolver.resolve('./runtime/composables'))
 
-    // in plaats van `nuxt.addPlugin`, doe je dit:
-    // nuxt.hook('app:resolve', () => {
-      addPlugin(resolve('./runtime/plugin'))
+    // addTypeTemplate({
+    //   filename: 'runtime/types/js-junction-nuxt.d.ts',
+    //   src: resolver.resolve('./runtime/types/js-junction-nuxt.d.ts'),
     // })
+
+    addPlugin(resolver.resolve('./runtime/plugin'))
   }
 })

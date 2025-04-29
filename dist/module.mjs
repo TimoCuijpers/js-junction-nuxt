@@ -1,22 +1,19 @@
-import { defineNuxtModule, createResolver, addImports, addPlugin } from '@nuxt/kit';
+import { defineNuxtModule, createResolver, addImportsDir, addPlugin } from '@nuxt/kit';
 
 const module = defineNuxtModule({
   meta: {
     name: "js-junction-nuxt",
-    configKey: "jsJunctionNuxt"
+    configKey: "jsJunctionNuxt",
+    dependsOn: ["nuxt-auth-sanctum"]
   },
   defaults: {
     /* default‐opties */
   },
   setup(options, nuxt) {
-    const { resolve } = createResolver(import.meta.url);
-    nuxt.options.build.transpile.push("js-junction-nuxt");
-    addImports({
-      name: "useApi",
-      as: "useApi",
-      from: resolve("./runtime/composables/useApi")
-    });
-    addPlugin(resolve("./runtime/plugin"));
+    const resolver = createResolver(import.meta.url);
+    nuxt.options.build.transpile.push(resolver.resolve("./runtime"));
+    addImportsDir(resolver.resolve("./runtime/composables"));
+    addPlugin(resolver.resolve("./runtime/plugin"));
   }
 });
 
