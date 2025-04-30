@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Filter from './filter.js';
-import Format from '../utilities/format.js';
+import Filter from './filter';
+import Format from '../utilities/format';
 
 export default class Pluck extends Filter {
     constructor () {

@@ -1,29 +1,47 @@
 /**
  * @implements {Property}
  */
-export default class Relations {
+export default class Relations implements Property {
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedFromJsonValue;
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedToJsonValue;
     /**
      * @param {Model} model Instance of the model.
      */
-    constructor(model: any);
+    constructor(model: Model);
     /**
      * @param {Model} model
      * @param {Object} json.
      */
-    fromJson(model: any, json: any): void;
+    fromJson(model: Model, json: any): void;
     /**
      * @param {Model} model
      *
      * @return {Object} The attributes casted to a json object.
      */
-    toJson(model: any): {};
+    toJson(model: Model): any;
     /**
      * @param {Model} model
      * @param {string} relation
      *
      * @returns {*} The value of the relation.
      */
-    get(model: any, relation: any): any;
+    get(model: Model, relation: string): any;
     /**
      * @param {Model} model
      * @param {string|Object} relation
@@ -31,23 +49,5 @@ export default class Relations {
      *
      * @returns {Relations}
      */
-    set(model: any, relation: any, value?: null): this;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The casted value.
-     */
-    static _getCastedFromJsonValue(value: any, options: any): any;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The casted value.
-     */
-    static _getCastedToJsonValue(value: any, options: any): any;
+    set(model: Model, relation: string | any, value?: any): Relations;
 }

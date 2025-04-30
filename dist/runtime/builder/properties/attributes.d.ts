@@ -1,29 +1,47 @@
 /**
  * @implements {Property}
  */
-export default class Attributes {
+export default class Attributes implements Property {
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedFromJsonValue;
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedToJsonValue;
     /**
      * @param {Model} model Instance of the model.
      */
-    constructor(model: any);
+    constructor(model: Model);
     /**
      * @param {Model} model
      * @param {Object} json.
      */
-    fromJson(model: any, json: any): void;
+    fromJson(model: Model, json: any): void;
     /**
      * @param {Model} model
      *
      * @return {Object} The attributes casted to a json object.
      */
-    toJson(model: any): {};
+    toJson(model: Model): any;
     /**
      * @param {Model} model
      * @param {string} attribute
      *
      * @returns {*} The value of the attribute.
      */
-    get(model: any, attribute: any): any;
+    get(model: Model, attribute: string): any;
     /**
      * @param {Model} model
      * @param {string|Object} attribute
@@ -31,23 +49,5 @@ export default class Attributes {
      *
      * @returns {Attributes}
      */
-    set(model: any, attribute: any, value?: null): this;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The casted value.
-     */
-    static _getCastedFromJsonValue(value: any, options: any): any;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The casted value.
-     */
-    static _getCastedToJsonValue(value: any, options: any): any;
+    set(model: Model, attribute: string | any, value?: any): Attributes;
 }

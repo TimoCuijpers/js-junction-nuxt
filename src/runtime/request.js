@@ -1,16 +1,16 @@
 import _ from 'lodash';
-import Action from './request/action.js';
-import Connection from './connection.js';
-import Filters from './filters/filters.js';
-import Modifiers from './modifiers/modifiers.js';
-import Pagination from './request/pagination.js';
+import Action from './request/action';
+import Connection from './connection';
+import Filters from './filters/filters';
+import Modifiers from './modifiers/modifiers';
+import Pagination from './request/pagination';
 
-import actionMixin from './mixins/actionMixin.js';
-import filterMixin from './mixins/filterMixin.js';
-import modifierMixin from './mixins/modifierMixin.js';
-import paginationMixin from './mixins/paginationMixin.js';
-import responseEventsMixin from './mixins/responseEventsMixin.js';
-import ResponseEventsHandler from './response/responseEventsHandler.js';
+import actionMixin from './mixins/actionMixin';
+import filterMixin from './mixins/filterMixin';
+import modifierMixin from './mixins/modifierMixin';
+import paginationMixin from './mixins/paginationMixin';
+import responseEventsMixin from './mixins/responseEventsMixin';
+import ResponseEventsHandler from './response/responseEventsHandler';
 
 /**
  * @mixes actionMixin

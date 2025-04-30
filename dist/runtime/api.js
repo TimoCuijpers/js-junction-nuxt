@@ -1,13 +1,22 @@
-import _ from "lodash";
-import Request from "./request.js";
-import Batch from "./batch.js";
-import responseEventsMixin from "./mixins/responseEventsMixin.js";
+import _ from 'lodash';
+import Request from './request.js';
+import Batch from './batch.js';
+// import axios from 'axios';
+
+import responseEventsMixin from './mixins/responseEventsMixin.js';
+
+/**
+ * @mixes responseEventsMixin
+ */
 export default class Api {
   constructor() {
     this._requests = [];
+
     this.host("http://localhost:8080").suffix("");
+
     this._initResponseEvents();
   }
+
   /**
    * @param {string} host
    *
@@ -15,8 +24,10 @@ export default class Api {
    */
   host(host) {
     this._host = host;
+
     return this;
   }
+
   /**
    * @param {string} suffix
    *
@@ -26,18 +37,24 @@ export default class Api {
     if (!_.startsWith(suffix, "/") && suffix) {
       suffix = `/${suffix}`;
     }
+
     this._suffix = suffix;
+
     return this;
   }
+
   /**
    * @returns {string} Url containing the host and suffix.
    */
   get baseUrl() {
     let url = "";
+
     if (this._host) url += this._host;
     if (this._suffix) url += this._suffix;
+
     return url;
   }
+
   /**
    * @param {Request} request
    */
@@ -45,9 +62,11 @@ export default class Api {
     if (!request.key) {
       return;
     }
+
     this._requests[request.key]?.cancel();
     this._requests[request.key] = request;
   }
+
   /**
    * @param {Request} request
    */
@@ -55,10 +74,12 @@ export default class Api {
     if (!request.key) {
       return;
     }
+
     if (request.response.isFinished) {
       delete this._requests[request.key];
     }
   }
+
   /**
    * @param {string} uri
    *
@@ -66,13 +87,18 @@ export default class Api {
    */
   request(uri) {
     if (!uri) throw new Error(`Request url is empty.`);
+
     if (!_.startsWith(uri, "/")) {
       uri = `/${uri}`;
     }
+
     const request = new Request();
+
     request.setUrl(uri).setApi(this);
+
     return request;
   }
+
   /**
    * @returns {this} The current instance.
    */
@@ -80,9 +106,12 @@ export default class Api {
     this._requests.forEach((request) => {
       request.cancel();
     });
+
     this._requests = [];
+
     return this;
   }
+
   /**
    * @param {array} requests
    * @returns Batch
@@ -90,15 +119,18 @@ export default class Api {
   batch(requests) {
     return new Batch(requests);
   }
+
   /**
    * @param {string} token
    */
   setBearer(token) {
     this.setHeader("Authorization", "Bearer " + token);
   }
+
   resetBearer() {
     this.removeHeader("Authorization");
   }
+
   // /**
   //  * @param {string} token
   //  */
@@ -109,6 +141,7 @@ export default class Api {
   // resetCsrf () {
   //     this.removeHeader('X-CSRF-TOKEN');
   // }
+
   // /**
   //  * @param {string} key
   //  * @param {string} value
@@ -123,16 +156,27 @@ export default class Api {
   // removeHeader (key) {
   //     delete useFetch().defaults.headers.common[key];
   // }
+
   /**
    * @param {function(Response)} onSuccess
    * @param {function(Error)} onError
    *
    * @returns {this}
    */
-  responseInterceptors(onSuccess = () => {
-  }, onError = () => {
-  }) {
+  responseInterceptors(onSuccess = () => {}, onError = () => {}) {
     this.request();
+    // axios.interceptors.response.use((response) => {
+    //   onSuccess(response);
+    //
+    //   return response;
+    // }, (error) => {
+    //   onError(error);
+    //
+    //   return Promise.reject(error);
+    // });
+    //
+    // return this;
   }
 }
+
 Object.assign(Api.prototype, responseEventsMixin);

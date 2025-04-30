@@ -1,4 +1,4 @@
-import Filter from './filter.js';
+import Filter from './filter';
 
 export default class Order extends Filter {
     constructor () {

@@ -1,47 +1,53 @@
 export default class ResponseEvents {
-    constructor();
+    _onSuccessCallbacks: any[];
+    _onErrorCallbacks: any[];
+    _onValidationErrorCallbacks: any[];
+    _onUnauthorizedCallbacks: any[];
+    _onForbiddenCallbacks: any[];
+    _onFinishedCallbacks: any[];
+    _onCancelledCallbacks: any[];
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnSuccessCallback(callback?: () => void): this;
+    addOnSuccessCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnErrorCallback(callback?: () => void): this;
+    addOnErrorCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnValidationErrorCallback(callback?: () => void): this;
+    addOnValidationErrorCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnUnauthorizedCallback(callback?: () => void): this;
+    addOnUnauthorizedCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnForbiddenCallback(callback?: () => void): this;
+    addOnForbiddenCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnFinishedCallback(callback?: () => void): this;
+    addOnFinishedCallback(callback?: () => any): this;
     /**
      * @param {function()} callback
      *
      * @returns {this} The current instance.
      */
-    addOnCancelledCallback(callback?: () => void): this;
+    addOnCancelledCallback(callback?: () => any): this;
     /**
      * Clears all `onSuccess` callbacks.
      *

@@ -1,19 +1,16 @@
-/**
- * @mixin paginationMixin
- */
-declare const paginationMixin: {
+export default paginationMixin;
+declare namespace paginationMixin {
     /**
      * @param {int} page
      * @param {int} [perPage]
      * @param {null|int} [findPageForId] Find the page the given id is on.
      * @returns {this}
      */
-    pagination(page: any, perPage?: number, findPageForId?: null): any;
+    function pagination(page: int, perPage?: int, findPageForId?: null | int): this;
     /**
      * @param {int} page
      * @param {int} [perPage]
      * @returns {this}
      */
-    simplePagination(page: any, perPage?: number): any;
-};
-export default paginationMixin;
+    function simplePagination(page: int, perPage?: int): this;
+}

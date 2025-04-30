@@ -1,10 +1,3 @@
-import Action from './request/action.js';
-import Connection from './connection.js.js';
-import Filters from './filters/filters.js';
-import Modifiers from './modifiers/modifiers.js';
-import Pagination from './request/pagination.js';
-import ResponseEventsHandler from './response/responseEventsHandler.js';
-import Api from "./api.js";
 /**
  * @mixes actionMixin
  * @mixes filterMixin
@@ -13,18 +6,17 @@ import Api from "./api.js";
  * @mixes responseEventsMixin
  */
 export default class Request {
+    url: string | null;
     _action: Action;
     _filters: Filters;
     _modifiers: Modifiers;
     _pagination: Pagination;
-    _customParameters: Array<any>;
+    _customParameters: any[];
     _connection: Connection;
-    _response: any;
+    _response: import("./response").default | null;
     key: any;
-    url: string;
-    constructor();
     setKey(key: any): this;
-    get response(): any;
+    get response(): import("./response").default | null;
     /**
      * @param {string} url
      *
@@ -44,23 +36,23 @@ export default class Request {
     /**
      * @returns {this} The current instance.
      */
-    get(): Promise<this>;
+    get(): this;
     /**
      * @param {Object} data
      *
      * @returns {this} The current instance.
      */
-    post(data?: object): Promise<this>;
+    post(data?: any): this;
     /**
      * @param {Object} data
      *
      * @returns {this} The current instance.
      */
-    put(data?: object): Promise<this>;
+    put(data?: any): this;
     /**
      * @returns {this} The current instance.
      */
-    delete(): Promise<this>;
+    delete(): this;
     /**
      * @param {Object} files
      * @param {Object} data
@@ -68,16 +60,16 @@ export default class Request {
      *
      * @returns {this} The current instance.
      */
-    storeFiles(files?: object, data?: object, url?: string | null): Promise<this>;
+    storeFiles(files?: any, data?: any, url?: string | null): this;
     /**
      * @returns {Object} Filter and modifier query parameters.
      */
-    get bodyParameters(): object;
+    get bodyParameters(): any;
     /**
      * @returns {ResponseEventsHandler}
      * @private
      */
-    _createResponseEventsHandler(): ResponseEventsHandler;
+    private _createResponseEventsHandler;
     /**
      * Add custom parameters to the request.
      *
@@ -85,7 +77,7 @@ export default class Request {
      *
      * @returns {this} The current instance.
      */
-    customParameters(parameters?: {}): this;
+    customParameters(parameters?: any): this;
     /**
      * Convert data to FormData.
      *
@@ -93,7 +85,7 @@ export default class Request {
      *
      * @returns {FormData}
      */
-    _createFormData(data?: object): FormData;
+    _createFormData(data?: any): FormData;
     /**
      * @param {Api} api
      *
@@ -101,3 +93,8 @@ export default class Request {
      */
     setApi(api: Api): this;
 }
+import Action from './request/action.js';
+import Filters from './filters/filters.js';
+import Modifiers from './modifiers/modifiers.js';
+import Pagination from './request/pagination.js';
+import Connection from './connection.js';

@@ -1,10 +1,7 @@
-// import { AxiosResponse } from 'axios';
-
 interface JsonMap {
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
-// Definieer de class en zijn methoden
 declare class Api {
     constructor();
 
@@ -104,17 +101,17 @@ export default class Model extends Request {
 
     fill(values?: JsonMap): this;
 
-    static accessors(): JsonMap;
+    accessors(): JsonMap;
 
-    static attributes(): JsonMap;
+    attributes(): JsonMap;
 
-    static counts(): JsonMap;
+    counts(): JsonMap;
 
-    static relations(): JsonMap;
+    relations(): JsonMap;
 
-    static mediaCollections(): JsonMap;
+    mediaCollections(): JsonMap;
 
-    static readonly endpoint: string;
+    readonly endpoint: string;
 
     readonly _identifier: number | string;
 
@@ -135,6 +132,70 @@ export default class Model extends Request {
     clone(): Model;
 
     _queryString(identifier?: number | string): string;
+
+    static index(): Promise<Model[]>
+    static show(identifier?: number | string): Promise<Model | null>
+    static store(extraData?: JsonMap): Promise<Model>
+    static update(extraData?: JsonMap): Promise<Model>
+    static destroy(): Promise<boolean>
+    static save(extraData?: JsonMap): Promise<Model>
+    static upload(files: object | object[], collection: string): Promise<Model>
+    static clone(): Model
+    static setApi(api: Api): void
+    static setUrl(url: string): void
+    static setKey(key: string): void
+    static cancel(): void
+    static get(): Promise<Model>
+    static post(data?: object): Promise<Model>
+    static put(data?: object): Promise<Model>
+    static delete(): Promise<Model>
+    static storeFiles(files?: object, data?: object, url?: string | null): Promise<Model>
+    static onSuccess<T = never>(callback?: (result: T, data: never) => void): Model
+    static onError(callback?: (response: Response) => void): Model
+    static onValidationError(callback?: (validation: object) => void): Model
+    static onUnauthorized(callback?: (response: Response) => void): Model
+    static onForbidden(callback?: (response: Response) => void): Model
+    static onFinished(callback?: (response: Response) => void): Model
+    static triggerResponseEvents(response: Response, successResponse?: never): Promise<void>
+    static customParameters(parameters?: object): Model
+    static setConfig(config: object): Model
+    static setBearer(token: string): void
+    static resetBearer(): void
+    static setCsrf(token: string): void
+    static resetCsrf(): void
+    static setHeader(key: string, value: string): void
+    static removeHeader(key: string): void
+    static responseInterceptors(
+      onSuccess?: (response: never) => void,
+      onError?: (error: never) => void
+    ): Model
+    static count(relations: never[]): Model
+    static limit(amount: number): Model
+    static order(input: string | never[], direction?: string): Model
+    static with(relations: never[]): Model
+    static scope(name: string, ...params: never[]): Model
+    static scopes(...params: never[]): Model
+    static search(value: never, columns?: never[]): Model
+    static where(column: string, operator: string, value?: never): Model
+    static wheres(...params: never[]): Model
+    static whereIn(column: string, values: never[]): Model
+    static whereIns(...params: never[]): Model
+    static whereNotIn(column: string, values: never[]): Model
+    static whereNotIns(...params: never[]): Model
+    static pluck(fields: never[]): Model
+    static appends(appends: string | string[]): Model
+    static hiddenFields(hiddenFields: string | string[]): Model
+    static action(name: string, id?: number): Model
+    static pagination(page: number, perPage?: number, findPageForId?: number | null): Model
+    static simplePagination(page: number, perPage?: number): Model
+    static setUrl(url: string): Model
+    static cancel(): Model
+    static get(): Promise<Model>
+    static post(data?: object): Promise<Model>
+    static put(data?: object): Promise<Model>
+    static setKey(key: string): Model
+    static delete(): Promise<Model>
+    static storeFiles(files?: object, data?: object, url?: string | null): Promise<Model>
 }
 
 declare class Batch {
@@ -158,6 +219,3 @@ declare class Batch {
 
     execute(method: string): Promise<any[]>;
 }
-
-// declare const api: Api;
-// export default api;

@@ -1,15 +1,15 @@
 import _ from 'lodash';
-import Caster from '../caster.js';
+import Caster from '../caster';
 
 /**
  * @implements {Property}
  */
-export default class Relations {
+export default class Attributes {
     /**
      * @param {Model} model Instance of the model.
      */
     constructor (model) {
-        _.each(model.constructor.relations(), (options, key) => {
+        _.each(model.constructor.attributes(), (options, key) => {
             this.set(model, key, _.has(options, 'default') ? options.default : null);
         });
     }
@@ -19,12 +19,14 @@ export default class Relations {
      * @param {Object} json.
      */
     fromJson (model, json) {
-        _.each(model.constructor.relations(), (options, key) => {
+        _.each(model.constructor.attributes(), (options, key) => {
             let value = _.get(json, options.jsonKey ?? _.snakeCase(key), _.get(json, _.camelCase(key)));
 
-            value = value
-                ? Relations._getCastedFromJsonValue(value, options)
-                : value;
+            if (_.isNil(value)) {
+                value = _.has(options, 'default') ? options.default : null;
+            } else {
+                value = Attributes._getCastedFromJsonValue(value, options);
+            }
 
             this.set(model, key, value);
         });
@@ -38,10 +40,10 @@ export default class Relations {
     toJson (model) {
         const json = {};
 
-        _.each(model.constructor.relations(), (options, key) => {
+        _.each(model.constructor.attributes(), (options, key) => {
             let jsonValue = this.get(model, key);
 
-            jsonValue = Relations._getCastedToJsonValue(jsonValue, options);
+            jsonValue = Attributes._getCastedToJsonValue(jsonValue, options);
 
             _.set(json, options.jsonKey ?? _.snakeCase(key), jsonValue);
         });
@@ -51,33 +53,33 @@ export default class Relations {
 
     /**
      * @param {Model} model
-     * @param {string} relation
+     * @param {string} attribute
      *
-     * @returns {*} The value of the relation.
+     * @returns {*} The value of the attribute.
      */
-    get (model, relation) {
-        return _.get(model, relation);
+    get (model, attribute) {
+        return _.get(model, attribute);
     }
 
     /**
      * @param {Model} model
-     * @param {string|Object} relation
+     * @param {string|Object} attribute
      * @param {*} value
      *
-     * @returns {Relations}
+     * @returns {Attributes}
      */
-    set (model, relation, value = null) {
-        if (_.isObject(relation)) {
-            _.each(model.constructor.relations(), (options, key) => {
-                if (! _.has(relation, key)) return;
+    set (model, attribute, value = null) {
+        if (_.isObject(attribute)) {
+            _.each(model.constructor.attributes(), (options, key) => {
+                if (! _.has(attribute, key)) return;
 
-                this.set(model, key, relation[key]);
+                this.set(model, key, attribute[key]);
             });
 
             return this;
         }
 
-        model[relation] = value;
+        model[attribute] = value;
 
         return this;
     }
@@ -91,14 +93,10 @@ export default class Relations {
      * @returns {*} The casted value.
      */
     static _getCastedFromJsonValue (value, options) {
-        if (_.has(options, 'type')) {
-            const cast = options.type;
+        if (_.has(options, 'type') || _.has(options, 'fromJson')) {
+            const cast = options.type ? options.type : options.fromJson;
 
-            if (_.isArray(value)) {
-                return _.map(value, (val) => Caster.fromJson(cast, val));
-            } else {
-                return Caster.fromJson(cast, value);
-            }
+            return Caster.fromJson(cast, value);
         }
 
         return value;
@@ -113,14 +111,10 @@ export default class Relations {
      * @returns {*} The casted value.
      */
     static _getCastedToJsonValue (value, options) {
-        if (_.has(options, 'type')) {
-            const cast = options.type;
+        if (_.has(options, 'type') || _.has(options, 'toJson')) {
+            const cast = options.type ? options.type : options.toJson;
 
-            if (_.isArray(value)) {
-                return _.map(value, (val) => Caster.toJson(cast, val));
-            } else {
-                return Caster.toJson(cast, value);
-            }
+            return Caster.toJson(cast, value);
         }
 
         return value;

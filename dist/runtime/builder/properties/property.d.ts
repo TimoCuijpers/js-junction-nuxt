@@ -8,7 +8,7 @@ declare class Property {
      *
      * @returns {*} The value of the attribute.
      */
-    get(model: any, key: any): void;
+    get(model: Model, key: string): any;
     /**
      * @param {Model} model
      * @param {string} key
@@ -16,16 +16,16 @@ declare class Property {
      *
      * @returns {*} The value that was set.
      */
-    set(model: any, key: any, value: any): void;
+    set(model: Model, key: string, value: any): any;
     /**
      * @param {Model} model
      * @param {Object} json.
      */
-    fromJson(model: any, json: any): void;
+    fromJson(model: Model, json: any): void;
     /**
      * @param {Model} model
      *
      * @return {Object} The json object.
      */
-    toJson(model: any): void;
+    toJson(model: Model): any;
 }

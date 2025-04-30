@@ -1,13 +1,11 @@
-/**
- * @mixin responseEventsMixin
- */
-declare const responseEventsMixin: {
+export default responseEventsMixin;
+declare namespace responseEventsMixin {
     /**
      * Constructor of the mixin.
      *
      * @protected
      */
-    _initResponseEvents(): void;
+    function _initResponseEvents(): void;
     /**
      * Add `onSuccess` callback to be called after the request.
      *
@@ -15,7 +13,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onSuccess(callback?: () => void): any;
+    function onSuccess(callback?: () => any): this;
     /**
      * Add `onError` callback to be called after the request.
      *
@@ -23,7 +21,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onError(callback?: () => void): any;
+    function onError(callback?: () => any): this;
     /**
      * Add `onValidationError` callback to be called after the request.
      *
@@ -31,7 +29,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onValidationError(callback?: () => void): any;
+    function onValidationError(callback?: () => any): this;
     /**
      * Add `onUnauthorized` callback to be called after the request.
      *
@@ -39,7 +37,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onUnauthorized(callback?: () => void): any;
+    function onUnauthorized(callback?: () => any): this;
     /**
      * Add `onForbidden` callback to be called after the request.
      *
@@ -47,7 +45,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onForbidden(callback?: () => void): any;
+    function onForbidden(callback?: () => any): this;
     /**
      * Add `onFinished` callback to be called after the request.
      *
@@ -55,7 +53,7 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onFinished(callback?: () => void): any;
+    function onFinished(callback?: () => any): this;
     /**
      * Add `onCancelled` callback to be called after the request.
      *
@@ -63,54 +61,53 @@ declare const responseEventsMixin: {
      *
      * @returns {this} The current instance.
      */
-    onCancelled(callback?: () => void): any;
+    function onCancelled(callback?: () => any): this;
     /**
      * Clears all callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearAllCallbacks(): any;
+    function clearAllCallbacks(): this;
     /**
      * Clears all `onSuccess` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnSuccessCallbacks(): any;
+    function clearOnSuccessCallbacks(): this;
     /**
      * Clears all `onError` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnErrorCallbacks(): any;
+    function clearOnErrorCallbacks(): this;
     /**
      * Clears all `onValidationError` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnValidationErrorCallbacks(): any;
+    function clearOnValidationErrorCallbacks(): this;
     /**
      * Clears all `onUnauthorized` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnUnauthorizedCallbacks(): any;
+    function clearOnUnauthorizedCallbacks(): this;
     /**
      * Clears all `onForbidden` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnForbiddenCallbacks(): any;
+    function clearOnForbiddenCallbacks(): this;
     /**
      * Clears all `onFinished` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnFinishedCallbacks(): any;
+    function clearOnFinishedCallbacks(): this;
     /**
      * Clears all `onCancelled` callbacks.
      *
      * @returns {this} The current instance.
      */
-    clearOnCancelledCallbacks(): any;
-};
-export default responseEventsMixin;
+    function clearOnCancelledCallbacks(): this;
+}

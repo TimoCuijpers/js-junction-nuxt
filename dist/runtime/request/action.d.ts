@@ -1,12 +1,11 @@
 export default class Action {
-    _name: null;
-    _id: null;
-    constructor();
+    _name: any;
+    _id: any;
     filled(): boolean;
-    name(name: null): void;
-    id(id: null): void;
+    name(name: any): void;
+    id(id: any): void;
     toObject(): {
-        id: null;
-        action: null;
+        action: any;
+        id: any;
     } | null;
 }

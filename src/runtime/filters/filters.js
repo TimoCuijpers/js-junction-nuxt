@@ -7,7 +7,7 @@ import Search from './search';
 import Wheres from './wheres';
 import WhereIn from './whereIn';
 import WhereNotIn from './whereNotIn';
-import Count from './count.js';
+import Count from './count';
 import Pluck from './pluck';
 
 export default class Filters {

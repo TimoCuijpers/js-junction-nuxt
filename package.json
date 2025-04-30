@@ -11,6 +11,7 @@
     },
     "./builder/*": {
       "import": "./dist/runtime/builder/*.js",
+      "require": "./dist/runtime/builder/*.d.ts",
       "types": "./dist/runtime/builder/*.d.ts"
     }
   },

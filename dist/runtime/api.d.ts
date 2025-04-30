@@ -1,22 +1,22 @@
-import Request from './request.js';
-import Batch from './batch.js';
 /**
  * @mixes responseEventsMixin
  */
 export default class Api {
-    constructor();
+    _requests: any[];
     /**
      * @param {string} host
      *
      * @returns {this} The current instance.
      */
-    host(host: any): this;
+    host(host: string): this;
+    _host: string | undefined;
     /**
      * @param {string} suffix
      *
      * @returns {this} The current instance.
      */
-    suffix(suffix: any): this;
+    suffix(suffix: string): this;
+    _suffix: string | undefined;
     /**
      * @returns {string} Url containing the host and suffix.
      */
@@ -24,17 +24,17 @@ export default class Api {
     /**
      * @param {Request} request
      */
-    cancelRunning(request: any): void;
+    cancelRunning(request: Request): void;
     /**
      * @param {Request} request
      */
-    removeRequest(request: any): void;
+    removeRequest(request: Request): void;
     /**
      * @param {string} uri
      *
      * @returns {Request} The created request.
      */
-    request(uri: any): Request;
+    request(uri: string): Request;
     /**
      * @returns {this} The current instance.
      */
@@ -43,11 +43,11 @@ export default class Api {
      * @param {array} requests
      * @returns Batch
      */
-    batch(requests: any): Batch;
+    batch(requests: any[]): Batch;
     /**
      * @param {string} token
      */
-    setBearer(token: any): void;
+    setBearer(token: string): void;
     resetBearer(): void;
     /**
      * @param {function(Response)} onSuccess
@@ -55,5 +55,7 @@ export default class Api {
      *
      * @returns {this}
      */
-    responseInterceptors(onSuccess?: () => void, onError?: () => void): void;
+    responseInterceptors(onSuccess?: (arg0: Response) => any, onError?: (arg0: Error) => any): this;
 }
+import Request from './request.js';
+import Batch from './batch.js';

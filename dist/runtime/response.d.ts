@@ -1,5 +1,8 @@
 export default class Response {
-    constructor();
+    _ofetchResponse: any;
+    _ofetchError: any;
+    data: any;
+    validation: any;
     /**
      * @deprecated Use `isFailed` instead.
      * @returns {boolean}
@@ -20,11 +23,11 @@ export default class Response {
      *
      * @returns {boolean}
      */
-    get isCancelled(): any;
+    get isCancelled(): boolean;
     /**
      * @returns {Number} The HTTP response status code.
      */
-    get statusCode(): any;
+    get statusCode(): number;
     setOfetchResponse(ofetchResponse: any): void;
     setOfetchError(ofetchError: any): void;
 }

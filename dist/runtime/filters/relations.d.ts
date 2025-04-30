@@ -1,7 +1,8 @@
-import Filter from './filter.js.js';
 export default class Relations extends Filter {
-    constructor();
-    filled(): boolean;
+    _relations: any[];
     add(relations: any): void;
-    toObject(): {};
+    toObject(): {
+        with: any[];
+    };
 }
+import Filter from './filter.js';

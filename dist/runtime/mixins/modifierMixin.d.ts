@@ -1,8 +1,11 @@
-/**
- * @mixin modifierMixin
- */
-declare const modifierMixin: {
-    appends(appends: any): any;
-    hiddenFields(hiddenFields: any): any;
-};
 export default modifierMixin;
+declare namespace modifierMixin {
+    function appends(appends: any): {
+        appends(appends: any): /*elided*/ any;
+        hiddenFields(hiddenFields: any): /*elided*/ any;
+    };
+    function hiddenFields(hiddenFields: any): {
+        appends(appends: any): /*elided*/ any;
+        hiddenFields(hiddenFields: any): /*elided*/ any;
+    };
+}

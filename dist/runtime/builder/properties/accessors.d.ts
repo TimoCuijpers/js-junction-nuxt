@@ -1,12 +1,29 @@
-import Model from "../model.js";
 /**
  * @implements {Property}
  */
-export default class Accessors {
+export default class Accessors implements Property {
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedFromJsonValue;
+    /**
+     * @private
+     *
+     * @param {*} value
+     * @param {Object} options
+     *
+     * @returns {*} The casted value.
+     */
+    private static _getCastedToJsonValue;
     /**
      * @param {Model} model Instance of the model.
      */
-    constructor(model: this);
+    constructor(model: Model);
     /**
      * @param {Model} model
      * @param {Object} json.
@@ -15,24 +32,16 @@ export default class Accessors {
     /**
      * @param {Model} model
      *
-     * @return {Object} The attributes cast to a JSON object.
+     * @return {Object} The attributes casted to a json object.
      */
-    toJson(model: {
-        constructor: {
-            accessors: () => any;
-        };
-    }): object;
+    toJson(model: Model): any;
     /**
      * @param {Model} model
      * @param {string} attribute
      *
      * @returns {*} The value of the attribute.
      */
-    get(model: {
-        constructor: {
-            accessors: () => any;
-        };
-    }, attribute: any): any;
+    get(model: Model, attribute: string): any;
     /**
      * @param {Model} model
      * @param {string} attribute
@@ -41,25 +50,4 @@ export default class Accessors {
      * @returns {*} The value that was set.
      */
     set(model: Model, attribute: string, value: any): any;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The cast value.
-     */
-    static _getCastedFromJsonValue(value: any, options: object): any;
-    /**
-     * @private
-     *
-     * @param {*} value
-     * @param {Object} options
-     *
-     * @returns {*} The cast value.
-     */
-    static _getCastedToJsonValue(value: any, options: {
-        type: any;
-        toJson: any;
-    }): any;
 }

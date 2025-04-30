@@ -1,4 +1,7 @@
 export default class Modifiers {
-    constructor();
+    appends: Appends;
+    hiddenFields: HiddenFields;
     toObject(): any;
 }
+import Appends from './appends.js';
+import HiddenFields from './hiddenFields.js';

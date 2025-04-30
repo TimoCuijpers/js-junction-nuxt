@@ -1,10 +1,14 @@
-import Response from './response.js';
 export default class Connection {
-    constructor();
+    _abortController: AbortController | null;
+    _config: {};
+    _api: any;
+    running: boolean;
+    canceled: boolean;
+    failed: boolean;
     cancel(): this | undefined;
     cancelRunning(request: any): void;
     removeRequest(request: any): void;
-    getConfig(): any;
+    getConfig(): {};
     setConfig(config: any): void;
     setApi(api: any): void;
     get(query: any, params: any): Promise<Response>;
@@ -13,3 +17,4 @@ export default class Connection {
     delete(query: any): Promise<Response>;
     _execute(url: any, method: any, body: any): Promise<Response>;
 }
+import Response from './response.js';

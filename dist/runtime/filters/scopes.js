@@ -1,23 +1,30 @@
-import Filter from "./filter.js";
+import Filter from './filter.js';
+
 export default class Relations extends Filter {
-  constructor() {
-    super();
-    this._scopes = [];
-  }
-  filled() {
-    return this._scopes.length > 0;
-  }
-  add(name, params) {
-    this._scopes.push({
-      name,
-      params
-    });
-  }
-  toObject() {
-    const data = {};
-    if (this.filled()) {
-      data.scopes = this._scopes;
+    constructor () {
+        super();
+
+        this._scopes = [];
     }
-    return data;
-  }
+
+    filled () {
+        return this._scopes.length > 0;
+    }
+
+    add (name, params) {
+        this._scopes.push({
+            name,
+            params,
+        });
+    }
+
+    toObject () {
+        const data = {};
+
+        if (this.filled()) {
+            data.scopes = this._scopes;
+        }
+
+        return data;
+    }
 }

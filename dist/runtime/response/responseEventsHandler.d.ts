@@ -1,52 +1,53 @@
 export default class ResponseEventsHandler {
-    constructor();
+    _responseEventsList: any[];
+    _onSuccessData: any;
     /**
      * @param {ResponseEvents} responseEvents
      * @returns {ResponseEventsHandler}
      */
-    addResponseEvents(responseEvents: any): this;
+    addResponseEvents(responseEvents: ResponseEvents): ResponseEventsHandler;
     /**
      * @param {*} data
      * @returns {ResponseEventsHandler}
      */
-    setOnSuccessData(data: any): this;
+    setOnSuccessData(data: any): ResponseEventsHandler;
     /**
      * @param {Response} response
      */
-    triggerResponseEvents(response: any): Promise<void>;
+    triggerResponseEvents(response: Response): Promise<void>;
     /**
      * @param {function[]} callbacks
      * @param data
      * @returns {Promise}
      * @private
      */
-    _executeCallbacks(callbacks: any, ...data: any[]): Promise<any[]>;
+    private _executeCallbacks;
     /**
      * @param {Response} response
      */
-    _executeOnSuccessCallbacks(response: any): Promise<void>;
+    _executeOnSuccessCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnErrorCallbacks(response: any): Promise<void>;
+    _executeOnErrorCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnValidationErrorCallbacks(response: any): Promise<void>;
+    _executeOnValidationErrorCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnUnauthorizedCallbacks(response: any): Promise<void>;
+    _executeOnUnauthorizedCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnForbiddenCallbacks(response: any): Promise<void>;
+    _executeOnForbiddenCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnFinishedCallbacks(response: any): Promise<void>;
+    _executeOnFinishedCallbacks(response: Response): Promise<void>;
     /**
      * @param {Response} response
      */
-    _executeOnCancelledCallbacks(response: any): Promise<void>;
+    _executeOnCancelledCallbacks(response: Response): Promise<void>;
 }

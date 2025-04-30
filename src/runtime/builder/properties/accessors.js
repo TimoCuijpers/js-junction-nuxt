@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Caster from '../caster.js';
+import Caster from '../caster';
 
 /**
  * @implements {Property}

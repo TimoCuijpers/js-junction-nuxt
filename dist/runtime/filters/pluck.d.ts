@@ -1,7 +1,8 @@
-import Filter from './filter.js.js';
 export default class Pluck extends Filter {
-    constructor();
-    filled(): boolean;
+    _fields: any[];
     add(fields: any): void;
-    toObject(): {};
+    toObject(): {
+        pluck: any[];
+    };
 }
+import Filter from './filter.js';

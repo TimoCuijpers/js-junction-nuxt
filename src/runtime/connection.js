@@ -82,17 +82,9 @@ export default class Connection {
             },
         };
 
-        // const client = useSanctumFetch()
+        const client = useSanctumClient()
 
-        await useSanctumFetch(url, Object.assign(config, this._config))
-          // .then(async (res) => {
-          //     response.setOfetchResponse(res)
-          // })
-          // .catch(async (err) => {
-          //     this.failed = true;
-          //
-          //     response.setOfetchError(err)
-          // })
+        await client(url, Object.assign(config, this._config))
           .finally(() => {
               this.running = false;
           })

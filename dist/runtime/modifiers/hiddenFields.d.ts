@@ -1,7 +1,8 @@
-import Modifier from './modifier.js';
 export default class HiddenFields extends Modifier {
-    constructor();
-    filled(): boolean;
+    _fields: any[];
     add(fields: any): void;
-    toObject(): {};
+    toObject(): {
+        hidden_fields: any[];
+    };
 }
+import Modifier from './modifier.js';

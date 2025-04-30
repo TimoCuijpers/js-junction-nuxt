@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Appends from './appends.js';
-import HiddenFields from './hiddenFields.js';
+import Appends from './appends';
+import HiddenFields from './hiddenFields';
 
 export default class Modifiers {
     constructor () {

@@ -1,7 +1,8 @@
-import Filter from './filter.js.js';
 export default class WhereIn extends Filter {
-    constructor();
-    filled(): boolean;
+    _whereIns: any[];
     add(column: any, values: any): void;
-    toObject(): {};
+    toObject(): {
+        where_in: any[];
+    };
 }
+import Filter from './filter.js';

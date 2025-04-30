@@ -1,7 +1,8 @@
-import Filter from './filter.js.js';
 export default class Limit extends Filter {
-    constructor();
-    filled(): boolean;
+    _amount: any;
     amount(amount: any): void;
-    toObject(): {};
+    toObject(): {
+        limit: any;
+    };
 }
+import Filter from './filter.js';

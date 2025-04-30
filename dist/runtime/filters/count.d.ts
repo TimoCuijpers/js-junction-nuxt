@@ -1,7 +1,8 @@
-import Filter from './filter.js';
 export default class Count extends Filter {
-    constructor();
-    filled(): boolean;
+    _relations: any[];
     add(relations: any): void;
-    toObject(): {};
+    toObject(): {
+        count: any[];
+    };
 }
+import Filter from './filter.js';

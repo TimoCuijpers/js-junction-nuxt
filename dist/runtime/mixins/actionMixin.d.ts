@@ -1,12 +1,9 @@
-/**
- * @mixin actionMixin
- */
-declare const actionMixin: {
+export default actionMixin;
+declare namespace actionMixin {
     /**
      * @param {string} name
      * @param {int} [id]
      * @returns {this}
      */
-    action(name: any, id: any): any;
-};
-export default actionMixin;
+    function action(name: string, id?: int): this;
+}

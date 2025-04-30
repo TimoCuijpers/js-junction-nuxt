@@ -1,7 +1,8 @@
-import Modifier from './modifier.js';
 export default class Appends extends Modifier {
-    constructor();
-    filled(): boolean;
+    _appends: any[];
     add(appends: any): void;
-    toObject(): {};
+    toObject(): {
+        appends: any[];
+    };
 }
+import Modifier from './modifier.js';

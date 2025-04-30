@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import Accessors from './properties/accessors.js';
-import Attributes from './properties/attributes.js';
-import Counts from './properties/counts.js';
-import Relations from './properties/relations.js';
-import MediaCollections from './properties/mediaCollections.js';
-import Request from '../request.js';
+import Accessors from './properties/accessors';
+import Attributes from './properties/attributes';
+import Counts from './properties/counts';
+import Relations from './properties/relations';
+import MediaCollections from './properties/mediaCollections';
+import Request from '../request';
 import Api from "../api.js";
 
 export class Model extends Request {

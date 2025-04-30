@@ -25,5 +25,5 @@ export default class Caster {
      *
      * @returns {any}
      */
-    static _castValue(value: any, cast: any): any;
+    static _castValue(value: any, cast: Function): any;
 }

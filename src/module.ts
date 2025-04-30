@@ -20,11 +20,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolver.resolve('./runtime/composables'))
 
-    // addTypeTemplate({
-    //   filename: 'runtime/types/js-junction-nuxt.d.ts',
-    //   src: resolver.resolve('./runtime/types/js-junction-nuxt.d.ts'),
-    // })
-
     addPlugin(resolver.resolve('./runtime/plugin'))
   }
 })
