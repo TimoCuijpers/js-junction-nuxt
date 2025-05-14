@@ -38,29 +38,29 @@ export default class Request {
      */
     get(): this;
     /**
-     * @param {Object} data
+     * @param {Object} body
      *
      * @returns {this} The current instance.
      */
-    post(data?: any): this;
+    post(body?: any): this;
     /**
-     * @param {Object} data
+     * @param {Object} body
      *
      * @returns {this} The current instance.
      */
-    put(data?: any): this;
+    put(body?: any): this;
     /**
      * @returns {this} The current instance.
      */
     delete(): this;
     /**
      * @param {Object} files
-     * @param {Object} data
+     * @param {Object} body
      * @param {string|null} url
      *
      * @returns {this} The current instance.
      */
-    storeFiles(files?: any, data?: any, url?: string | null): this;
+    storeFiles(files?: any, body?: any, url?: string | null): this;
     /**
      * @returns {Object} Filter and modifier query parameters.
      */

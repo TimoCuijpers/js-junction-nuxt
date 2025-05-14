@@ -11,6 +11,7 @@ import modifierMixin from './mixins/modifierMixin';
 import paginationMixin from './mixins/paginationMixin';
 import responseEventsMixin from './mixins/responseEventsMixin';
 import ResponseEventsHandler from './response/responseEventsHandler';
+import * as string_decoder from "node:string_decoder";
 
 /**
  * @mixes actionMixin
@@ -101,18 +102,18 @@ export default class Request {
     }
 
     /**
-     * @param {Object} data
+     * @param {Object} body
      *
      * @returns {this} The current instance.
      */
-    async post (data = {}) {
+    async post (body = {}) {
         const url = this.url ?? this.constructor.endpoint;
 
         this._connection.cancelRunning(this);
 
         this._response = await this._connection.post(
             url,
-            { ...data, ...this.bodyParameters },
+            { ...body, ...this.bodyParameters },
         );
 
         this._connection.removeRequest(this);
@@ -126,24 +127,42 @@ export default class Request {
     }
 
     /**
-     * @param {Object} data
+     * @param {Object} body
      *
      * @returns {this} The current instance.
      */
-    async put (data = {}) {
+    async put (body = {}) {
+        const config = this._connection.getConfig();
+
         const url = this.url ?? this.constructor.endpoint;
 
         this._connection.cancelRunning(this);
 
         this._response = await this._connection.put(
-            url,
-            { ...data, ...this.bodyParameters },
+          url,
+          { ...body, ...this.bodyParameters },
         );
 
         this._connection.removeRequest(this);
 
-        const responseEventsHandler = this._createResponseEventsHandler();
-        await responseEventsHandler.triggerResponseEvents(this._response);
+        if (config.returnFromJson) {
+          let items;
+
+          if (this._response.data) {
+            items = _.map(this._response.data.items, (item) => {
+              return this.constructor.fromJson(item);
+            });
+          }
+
+          const responseEventsHandler = this._createResponseEventsHandler();
+          responseEventsHandler.setOnSuccessData(items);
+          await responseEventsHandler.triggerResponseEvents(this._response);
+
+        } else {
+
+          const responseEventsHandler = this._createResponseEventsHandler();
+          await responseEventsHandler.triggerResponseEvents(this._response);
+        }
 
         this.clearAllCallbacks();
 
@@ -174,12 +193,12 @@ export default class Request {
 
     /**
      * @param {Object} files
-     * @param {Object} data
+     * @param {Object} body
      * @param {string|null} url
      *
      * @returns {this} The current instance.
      */
-    async storeFiles (files = {}, data = {}, url = null) {
+    async storeFiles (files = {}, body = {}, url = null) {
         let queryUrl = url ?? this.url ?? this.constructor.endpoint;
 
         this._connection.cancelRunning(this);
@@ -190,7 +209,7 @@ export default class Request {
             },
         });
 
-        const formData = this._createFormData(_.merge({}, files, data));
+        const formData = this._createFormData(_.merge({}, files, body));
 
         if (! _.isEmpty(this.bodyParameters)) {
             queryUrl = `${queryUrl}?${this.bodyParameters}`;

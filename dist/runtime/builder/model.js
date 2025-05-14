@@ -11,6 +11,7 @@ export class Model extends Request {
     constructor (defaults = {}) {
         super();
 
+        this._modelResponse = false;
         this._accessors = new Accessors(this);
         this._attributes = new Attributes(this);
         this._counts = new Counts(this);
@@ -122,6 +123,14 @@ export class Model extends Request {
      */
     get _identifier () {
         return _.get(this, 'id');
+    }
+
+    setParsedResponse () {
+      this.setConfig({
+        returnFromJson: true,
+      })
+
+      return this;
     }
 
     /**
