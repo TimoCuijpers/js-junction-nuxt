@@ -51,3 +51,4 @@ export default class Relations implements Property {
      */
     set(model: Model, relation: string | any, value?: any): Relations;
 }
+import Model from "../model.js.js";

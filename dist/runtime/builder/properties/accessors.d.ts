@@ -51,3 +51,4 @@ export default class Accessors implements Property {
      */
     set(model: Model, attribute: string, value: any): any;
 }
+import Model from "../model.js.js";

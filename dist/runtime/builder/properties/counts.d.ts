@@ -39,3 +39,4 @@ export default class Counts implements Property {
      */
     key(key: string, camelCase?: boolean): string;
 }
+import Model from '../model.js.js';

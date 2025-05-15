@@ -105,7 +105,7 @@ export default class Model extends Request {
     readonly endpoint: string;
     readonly _identifier: number | string;
     static fromJson(json: JsonMap): Model;
-    static toJson(): JsonMap;
+    toJson(): JsonMap;
     static fill(values?: JsonMap): Model;
     index(): Promise<Model[]>;
     show(identifier?: number | string): Promise<Model | null>;

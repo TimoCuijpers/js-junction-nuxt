@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import Model from '../model.js';
+
 /**
  * @implements {Property}
  */
