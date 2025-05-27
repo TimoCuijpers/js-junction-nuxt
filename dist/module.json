@@ -4,7 +4,7 @@
   "dependsOn": [
     "nuxt-auth-sanctum"
   ],
-  "version": "0.0.9",
+  "version": "0.0.10",
   "builder": {
     "@nuxt/module-builder": "0.8.4",
     "unbuild": "unknown"
