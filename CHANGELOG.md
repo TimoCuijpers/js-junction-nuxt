@@ -25,7 +25,7 @@
 
 ## v0.0.10
 - Updated Readme.md
-- Added onFinished to the js-junction-nuxt.d.ts file (TS support).
+- Added onFinished to the model.d.ts file (TS support).
 - Remove request from _requests array after the request was finished.
 - Added support for simple pagination.
 

@@ -1,7 +1,7 @@
 {
   "name": "js-junction-nuxt",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "This project allows you to easily consume API's built with Junction.",
   "exports": {
     ".": {
@@ -39,7 +39,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "latest",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "nuxt-auth-sanctum": "^0.6.6"
   },
   "overrides": {
     "globby": "13.1.3"

@@ -23,7 +23,7 @@ npm install @weapnl/js-junction
 ```javascript
 import api, { Model } from '@weapnl/js-junction';
 
-api.host('YOUR API HOST URI HERE') // Optionally: add '.suffix('API SUFFIX HERE');'
+api.host('YOUR API HOST URI HERE') // Optionally: details '.suffix('API SUFFIX HERE');'
 
 // Define a model
 class User extends Model {
@@ -188,7 +188,7 @@ const request = await new User()
     .order([['id', 'asc'], ['name', 'desc']]) // Order by id ascending and name descending
     .with('orders') // Load relation
     .with(['orders']) // Load relations
-    .count('orders') // Add relation counts (will add a key `ordersCount` to the result)
+    .count('orders') // Add relation counts (will details a key `ordersCount` to the result)
     .scope('hasOrders', 'extra params') // Apply scope
     .search('john doe') // Search for 'john doe', on the searchable columns of the model (defined in the API)
     .search('john doe', ['name', 'email']) // Search for 'john doe' in columns 'name' and 'email'

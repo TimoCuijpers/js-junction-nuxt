@@ -1,13 +1,14 @@
 import _ from 'lodash';
 import Response from './response.js';
 // import axios from 'axios';
+import { useSanctumClient } from "#imports";
 
 export default class Connection {
     constructor () {
         this._abortController = null;
 
         this._config = {};
-        this._api = null;
+        this._api = import.meta.env.NUXT_PUBLIC_API_BASE_URL;
 
         this.running = false;
         this.canceled = false;
