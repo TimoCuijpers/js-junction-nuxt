@@ -2,14 +2,14 @@ import _ from 'lodash';
 import Response from './response';
 // import axios from 'axios';
 import { useSanctumClient } from "#imports";
-import { useRuntimeConfig } from '#app'
+import Api from "./api.js";
 
 export default class Connection {
     constructor () {
         this._abortController = null;
 
         this._config = {};
-        this._api = useRuntimeConfig().public.junctionApiUrl;
+        this._api = new Api();
 
         this.running = false;
         this.canceled = false;
@@ -25,7 +25,7 @@ export default class Connection {
     }
 
     cancelRunning (request) {
-        this._api.cancelRunning(request);
+        this._api?.cancelRunning(request);
     }
 
     removeRequest (request) {

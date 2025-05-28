@@ -1,11 +1,24 @@
 import { defineNuxtPlugin } from "#app";
-import Model from "./builder/model.js";
-export default defineNuxtPlugin((nuxtApp) => {
-  const testJunction = "testJunction";
-  return {
-    provide: {
-      Model,
-      testJunction
+import Api from "./api.js";
+export default defineNuxtPlugin({
+  name: "js-junction-nuxt",
+  parallel: true,
+  setup(nuxtApp) {
+    const api = new Api();
+    api.host(nuxtApp.$config.public.apiBaseUrl || "http://localhost:3000");
+    api.suffix("/api");
+    return {
+      provide: {
+        api
+      }
+    };
+  },
+  hooks: {
+    "app:beforeMount"(nuxtApp) {
+      const api = new Api();
+      api.host(nuxtApp.$config.public.apiBaseUrl || "http://localhost:3000");
+      api.suffix("/api");
+      nuxtApp.provide("api", api);
     }
-  };
+  }
 });

@@ -1,7 +1,7 @@
 export default class Connection {
     _abortController: AbortController | null;
     _config: {};
-    _api: any;
+    _api: Api;
     running: boolean;
     canceled: boolean;
     failed: boolean;
@@ -17,4 +17,5 @@ export default class Connection {
     delete(query: any): Promise<Response>;
     _execute(url: any, method: any, body: any): Promise<Response>;
 }
+import Api from "./api.js.js";
 import Response from './response.js';

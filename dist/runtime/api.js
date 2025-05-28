@@ -12,7 +12,7 @@ export default class Api {
   constructor() {
     this._requests = [];
 
-    this.host("http://localhost:8080").suffix("");
+    this.host("/").suffix("");
 
     this._initResponseEvents();
   }
