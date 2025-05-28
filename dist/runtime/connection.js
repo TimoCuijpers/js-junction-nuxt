@@ -9,7 +9,7 @@ export default class Connection {
         this._abortController = null;
 
         this._config = {};
-        this._api = useRuntimeConfig().public.apiBaseUrl;
+        this._api = useRuntimeConfig().public.junctionApiUrl;
 
         this.running = false;
         this.canceled = false;
