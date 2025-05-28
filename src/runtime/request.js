@@ -325,8 +325,8 @@ export default class Request {
     }
 }
 
-Object.assign(Request.prototype, actionMixin);
-Object.assign(Request.prototype, filterMixin);
-Object.assign(Request.prototype, modifierMixin);
-Object.assign(Request.prototype, paginationMixin);
-Object.assign(Request.prototype, responseEventsMixin);
+// Object.assign(Request.prototype, actionMixin);
+// Object.assign(Request.prototype, filterMixin);
+// Object.assign(Request.prototype, modifierMixin);
+// Object.assign(Request.prototype, paginationMixin);
+// Object.assign(Request.prototype, responseEventsMixin);
