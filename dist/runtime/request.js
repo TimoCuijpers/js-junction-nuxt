@@ -255,7 +255,7 @@ export default class Request {
      */
     _createResponseEventsHandler () {
         const responseEventsHandler = new ResponseEventsHandler();
-        responseEventsHandler.addResponseEvents(this._connection._api._responseEvents);
+        responseEventsHandler.addResponseEvents(this._connection._api?._responseEvents);
         responseEventsHandler.addResponseEvents(this._responseEvents);
 
         return responseEventsHandler;

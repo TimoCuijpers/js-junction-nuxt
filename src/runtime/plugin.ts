@@ -1,9 +1,8 @@
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin, useNuxtApp } from '#app'
 import Api from './api'
 
 export default defineNuxtPlugin({
   name: 'js-junction-nuxt',
-  parallel: true,
   setup (nuxtApp)  {
     const api = new Api()
 
@@ -17,12 +16,13 @@ export default defineNuxtPlugin({
    }
   },
   hooks: {
-    'app:beforeMount'(nuxtApp) {
-      // Reset the API instance on app reload
-      const api = new Api()
-      api.host(nuxtApp.$config.public.apiBaseUrl || 'http://localhost:3000')
-      api.suffix('/api')
-      nuxtApp.provide('api', api)
-    }
+    // 'app:beforeMount'() {
+    //   const nuxtApp = useNuxtApp()
+    //   console.log(window.api)
+    //   // Reset the API instance on app reload
+    //   // nuxtApp.$api = new Api()
+    //   nuxtApp.$api.host('http://localhost:3000')
+    //   nuxtApp.$api.suffix('/api')
+    // }
   }
 })

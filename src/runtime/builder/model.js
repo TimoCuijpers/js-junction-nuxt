@@ -6,8 +6,9 @@ import Relations from './properties/relations';
 import MediaCollections from './properties/mediaCollections';
 import Request from '../request';
 import { useNuxtApp } from '#app';
+import Api from "../api.js";
 
-const api = useNuxtApp().$api;
+const api = useNuxtApp().$api || new Api();
 
 export class Model extends Request {
     constructor (defaults = {}) {

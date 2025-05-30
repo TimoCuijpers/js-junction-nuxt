@@ -25,7 +25,7 @@ export default class Connection {
     }
 
     cancelRunning (request) {
-        this._api?.cancelRunning(request);
+        this._api.cancelRunning(request);
     }
 
     removeRequest (request) {
