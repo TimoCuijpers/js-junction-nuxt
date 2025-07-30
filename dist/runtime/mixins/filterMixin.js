@@ -42,12 +42,17 @@ const filterMixin = {
                 // If the item is an array ([column name, direction])
                 else if (Array.isArray(item)) {
                     let [column, direction = 'asc'] = item; // default value for dir is 'asc' if not specified
-
-                    column = column
-                        .split('.')
-                        .map(segment => _.snakeCase(segment))
-                        .join('.');
-                    this._filters.order.add(column, direction);
+                    if (column && direction) {
+                        if (column.includes('.')) {
+                            column = column
+                              .split('.')
+                              .map(segment => _.snakeCase(segment))
+                              .join('.');
+                        } else {
+                            column = _.snakeCase(column);
+                        }
+                        this._filters.order.add(column, direction);
+                    }
                 }
             });
         }
