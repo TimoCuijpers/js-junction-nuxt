@@ -61,7 +61,7 @@ export default class Connection {
     }
 
     async _execute (url, method, body) {
-        const connectionConfig = await this.getConfig()
+        const connectionConfig = this.getConfig()
 
         this.running = true;
 
@@ -72,7 +72,7 @@ export default class Connection {
         const response = new Response();
 
         const config = {
-            url: (this._api ? this._api.baseUrl : 'http://localhost:3000') + url,
+            url,
             method,
             ...({
                 [method === 'get' ? 'params' : 'body']: body,
@@ -86,11 +86,11 @@ export default class Connection {
             },
         };
 
-        const client = useSanctumClient()
-
         if(connectionConfig?.onlyConfig) {
-          return config;
+          return Object.assign(config, this._config);
         }
+
+        const client = useSanctumClient()
 
         await client(url, Object.assign(config, this._config))
           .finally(() => {
@@ -98,5 +98,52 @@ export default class Connection {
           })
 
         return response;
+    }
+
+    sget (query, params) {
+        return this._sexecute(query, 'get', params);
+    }
+
+    spost (query, data) {
+        return this._sexecute(query, 'post', data);
+    }
+
+    sput (query, params) {
+        return this._sexecute(query, 'put', params);
+    }
+
+    sdelete (query) {
+        return this._sexecute(query, 'delete');
+    }
+
+    _sexecute (url, method, body) {
+        const connectionConfig = this.getConfig()
+
+        this.running = true;
+
+        if (! _.startsWith(url, '/')) {
+            url = `/${url}`;
+        }
+
+        const response = new Response();
+
+        const config = {
+            url,
+            method,
+            ...({
+                [method === 'get' ? 'params' : 'body']: body,
+            }),
+            signal: (this._abortController = new AbortController()).signal,
+            async onResponse({request: req, response: res, options: opt}) {
+                response.setOfetchResponse(res)
+            },
+            async onResponseError({request: req, response: res, options: opt}) {
+                response.setOfetchError(res)
+            },
+        };
+
+        if(connectionConfig?.onlyConfig) {
+          return Object.assign(config, this._config);
+        }
     }
 }

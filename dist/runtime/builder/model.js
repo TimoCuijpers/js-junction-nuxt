@@ -149,6 +149,7 @@ export class Model extends Request {
      * @returns {this[]} List of models.
      */
     async index () {
+        const config = this._connection.getConfig();
         this._connection.cancelRunning(this);
 
         this._response = await this._connection.post(
@@ -172,6 +173,10 @@ export class Model extends Request {
 
         this.clearAllCallbacks();
 
+        if(config?.onlyConfig){
+          return this._response
+        }
+
         return items;
     }
 
@@ -183,6 +188,7 @@ export class Model extends Request {
      * @returns {this} Model found for the given id.
      */
     async show (identifier) {
+        const config = this._connection.getConfig();
         identifier ??= this._identifier;
 
         if (! identifier) return null;
@@ -208,6 +214,10 @@ export class Model extends Request {
 
         this.clearAllCallbacks();
 
+        if(config?.onlyConfig){
+          return this._response
+        }
+
         return item;
     }
 
@@ -219,6 +229,7 @@ export class Model extends Request {
      * @returns {this} The created model.
      */
     async store (extraData = {}) {
+        const config = this._connection.getConfig();
         this._connection.cancelRunning(this);
 
         this._response = await this._connection.post(
@@ -240,6 +251,10 @@ export class Model extends Request {
 
         this.clearAllCallbacks();
 
+        if(config?.onlyConfig){
+          return this._response
+        }
+
         return item;
     }
 
@@ -251,6 +266,7 @@ export class Model extends Request {
      * @returns {this} The updated model.
      */
     async update (extraData = {}) {
+        const config = this._connection.getConfig();
         this._connection.cancelRunning(this);
 
         this._response = await this._connection.put(
@@ -271,6 +287,163 @@ export class Model extends Request {
         await responseEventsHandler.triggerResponseEvents(this._response);
 
         this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
+
+        return item;
+    }
+
+
+    /**
+     * Get a list of models.
+     *
+     * @returns {this[]} List of models.
+     */
+    sindex () {
+        const config = this._connection.getConfig();
+        this._connection.cancelRunning(this);
+
+        this._response =  this._connection.spost(
+            this._queryString() + '/index',
+            this.bodyParameters,
+        );
+
+        this._connection.removeRequest(this);
+
+        let items;
+
+        if (this._response.data) {
+            items = _.map(this._response.data.items, (item) => {
+                return this.constructor.fromJson(item);
+            });
+        }
+
+        const responseEventsHandler = this._createResponseEventsHandler();
+        responseEventsHandler.setOnSuccessData(items);
+        // await responseEventsHandler.triggerResponseEvents(this._response);
+
+        this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
+
+        return items;
+    }
+
+    /**
+     * Get a single model.
+     *
+     * @param {int} [identifier]
+     *
+     * @returns {this} Model found for the given id.
+     */
+    sshow (identifier) {
+        const config = this._connection.getConfig();
+        identifier ??= this._identifier;
+
+        if (! identifier) return null;
+
+        this._connection.cancelRunning(this);
+
+        this._response =  this._connection.spost(
+            this._queryString(identifier) + '/show',
+            this.bodyParameters,
+        );
+
+        this._connection.removeRequest(this);
+
+        let item;
+
+        if (this._response.data) {
+            item = this.constructor.fromJson(this._response.data);
+        }
+
+        const responseEventsHandler = this._createResponseEventsHandler();
+        responseEventsHandler.setOnSuccessData(item);
+        // await responseEventsHandler.triggerResponseEvents(this._response);
+
+        this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
+
+        return item;
+    }
+
+    /**
+     * Create an model.
+     *
+     * @param {Object} [extraData] Extra data to send to the API
+     *
+     * @returns {this} The created model.
+     */
+    sstore (extraData = {}) {
+        const config = this._connection.getConfig();
+        this._connection.cancelRunning(this);
+
+        this._response =  this._connection.spost(
+            this._queryString(),
+            { ...this._attributes.toJson(this), ...this._mediaCollections.toJson(this), ...extraData },
+        );
+
+        this._connection.removeRequest(this);
+
+        let item;
+
+        if (this._response.data) {
+            item = this.constructor.fromJson(this._response.data);
+        }
+
+        const responseEventsHandler = this._createResponseEventsHandler();
+        responseEventsHandler.setOnSuccessData(item);
+        // await responseEventsHandler.triggerResponseEvents(this._response);
+
+        this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
+
+        return item;
+    }
+
+    /**
+     * Update the current model.
+     *
+     * @param {Object} [extraData] Extra data to send to the API
+     *
+     * @returns {this} The updated model.
+     */
+    supdate (extraData = {}) {
+        const config = this._connection.getConfig();
+        this._connection.cancelRunning(this);
+
+        this._response =  this._connection.sput(
+            this._queryString(this._identifier),
+            { ...this._attributes.toJson(this), ...this._mediaCollections.toJson(this), ...extraData },
+        );
+
+        this._connection.removeRequest(this);
+
+        let item;
+
+        if (this._response.data) {
+            item = this.constructor.fromJson(this._response.data);
+        }
+
+        const responseEventsHandler = this._createResponseEventsHandler();
+        responseEventsHandler.setOnSuccessData(item);
+        // await responseEventsHandler.triggerResponseEvents(this._response);
+
+        this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
 
         return item;
     }

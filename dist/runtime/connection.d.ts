@@ -23,7 +23,7 @@ export default class Connection {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     }>;
     post(query: any, data: any): Promise<Response | {
@@ -38,7 +38,7 @@ export default class Connection {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     }>;
     put(query: any, params: any): Promise<Response | {
@@ -53,7 +53,7 @@ export default class Connection {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     }>;
     delete(query: any): Promise<Response | {
@@ -68,7 +68,7 @@ export default class Connection {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     }>;
     _execute(url: any, method: any, body: any): Promise<Response | {
@@ -83,9 +83,84 @@ export default class Connection {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     }>;
+    sget(query: any, params: any): {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: any;
+        method: any;
+    } | undefined;
+    spost(query: any, data: any): {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: any;
+        method: any;
+    } | undefined;
+    sput(query: any, params: any): {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: any;
+        method: any;
+    } | undefined;
+    sdelete(query: any): {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: any;
+        method: any;
+    } | undefined;
+    _sexecute(url: any, method: any, body: any): {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: any;
+        method: any;
+    } | undefined;
 }
 import Api from "./api.js.js";
 import Response from './response.js';

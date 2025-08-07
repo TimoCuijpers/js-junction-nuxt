@@ -25,7 +25,7 @@ export default class Request {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     } | null;
     key: any;
@@ -42,7 +42,7 @@ export default class Request {
             response: any;
             options: any;
         }): Promise<void>;
-        url: string;
+        url: any;
         method: any;
     } | null;
     /**
