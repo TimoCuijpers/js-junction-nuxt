@@ -135,6 +135,14 @@ export class Model extends Request {
       return this;
     }
 
+    getRequest () {
+      this.setConfig({
+        onlyConfig: true,
+      })
+
+      return this;
+    }
+
     /**
      * Get a list of models.
      *

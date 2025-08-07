@@ -13,10 +13,38 @@ export default class Request {
     _pagination: Pagination;
     _customParameters: any[];
     _connection: Connection;
-    _response: import("./response").default | null;
+    _response: import("./response").default | {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: string;
+        method: any;
+    } | null;
     key: any;
     setKey(key: any): this;
-    get response(): import("./response").default | null;
+    get response(): import("./response").default | {
+        signal: AbortSignal;
+        onResponse({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        onResponseError({ request: req, response: res, options: opt }: {
+            request: any;
+            response: any;
+            options: any;
+        }): Promise<void>;
+        url: string;
+        method: any;
+    } | null;
     /**
      * @param {string} url
      *

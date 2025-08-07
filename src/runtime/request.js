@@ -82,6 +82,7 @@ export default class Request {
      * @returns {this} The current instance.
      */
     async get () {
+        const config = this._connection.getConfig();
         const url = this.url ?? this.constructor.endpoint;
 
         this._connection.cancelRunning(this);
@@ -98,6 +99,10 @@ export default class Request {
 
         this.clearAllCallbacks();
 
+        if(config?.onlyConfig){
+          return this._response
+        }
+
         return this;
     }
 
@@ -107,9 +112,11 @@ export default class Request {
      * @returns {this} The current instance.
      */
     async post (body = {}) {
+        const config = this._connection.getConfig();
         const url = this.url ?? this.constructor.endpoint;
 
         this._connection.cancelRunning(this);
+
 
         this._response = await this._connection.post(
             url,
@@ -122,6 +129,10 @@ export default class Request {
         await responseEventsHandler.triggerResponseEvents(this._response);
 
         this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
 
         return this;
     }
@@ -165,6 +176,10 @@ export default class Request {
         }
 
         this.clearAllCallbacks();
+
+        if(config?.onlyConfig){
+          return this._response
+        }
 
         return this;
     }

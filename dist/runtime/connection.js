@@ -61,6 +61,8 @@ export default class Connection {
     }
 
     async _execute (url, method, body) {
+        const connectionConfig = await this.getConfig()
+
         this.running = true;
 
         if (! _.startsWith(url, '/')) {
@@ -85,6 +87,10 @@ export default class Connection {
         };
 
         const client = useSanctumClient()
+
+        if(connectionConfig?.onlyConfig) {
+          return config;
+        }
 
         await client(url, Object.assign(config, this._config))
           .finally(() => {
