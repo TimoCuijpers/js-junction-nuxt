@@ -87,80 +87,25 @@ export default class Connection {
         method: any;
     }>;
     sget(query: any, params: any): {
-        signal: AbortSignal;
-        onResponse({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
-        onResponseError({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
         url: any;
         method: any;
-    } | undefined;
+    };
     spost(query: any, data: any): {
-        signal: AbortSignal;
-        onResponse({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
-        onResponseError({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
         url: any;
         method: any;
-    } | undefined;
+    };
     sput(query: any, params: any): {
-        signal: AbortSignal;
-        onResponse({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
-        onResponseError({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
         url: any;
         method: any;
-    } | undefined;
+    };
     sdelete(query: any): {
-        signal: AbortSignal;
-        onResponse({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
-        onResponseError({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
         url: any;
         method: any;
-    } | undefined;
+    };
     _sexecute(url: any, method: any, body: any): {
-        signal: AbortSignal;
-        onResponse({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
-        onResponseError({ request: req, response: res, options: opt }: {
-            request: any;
-            response: any;
-            options: any;
-        }): Promise<void>;
         url: any;
         method: any;
-    } | undefined;
+    };
 }
 import Api from "./api.js.js";
 import Response from './response.js';

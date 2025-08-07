@@ -117,15 +117,9 @@ export default class Connection {
     }
 
     _sexecute (url, method, body) {
-        const connectionConfig = this.getConfig()
-
-        this.running = true;
-
         if (! _.startsWith(url, '/')) {
             url = `/${url}`;
         }
-
-        const response = new Response();
 
         const config = {
             url,
@@ -133,17 +127,8 @@ export default class Connection {
             ...({
                 [method === 'get' ? 'params' : 'body']: body,
             }),
-            signal: (this._abortController = new AbortController()).signal,
-            async onResponse({request: req, response: res, options: opt}) {
-                response.setOfetchResponse(res)
-            },
-            async onResponseError({request: req, response: res, options: opt}) {
-                response.setOfetchError(res)
-            },
         };
 
-        if(connectionConfig?.onlyConfig) {
-          return Object.assign(config, this._config);
-        }
+        return Object.assign(config, this._config);
     }
 }

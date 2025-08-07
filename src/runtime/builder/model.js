@@ -302,35 +302,12 @@ export class Model extends Request {
      * @returns {this[]} List of models.
      */
     sindex () {
-        const config = this._connection.getConfig();
-        this._connection.cancelRunning(this);
-
         this._response =  this._connection.spost(
             this._queryString() + '/index',
             this.bodyParameters,
         );
 
-        this._connection.removeRequest(this);
-
-        let items;
-
-        if (this._response.data) {
-            items = _.map(this._response.data.items, (item) => {
-                return this.constructor.fromJson(item);
-            });
-        }
-
-        const responseEventsHandler = this._createResponseEventsHandler();
-        responseEventsHandler.setOnSuccessData(items);
-        // await responseEventsHandler.triggerResponseEvents(this._response);
-
-        this.clearAllCallbacks();
-
-        if(config?.onlyConfig){
-          return this._response
-        }
-
-        return items;
+        return this._response
     }
 
     /**
@@ -341,37 +318,16 @@ export class Model extends Request {
      * @returns {this} Model found for the given id.
      */
     sshow (identifier) {
-        const config = this._connection.getConfig();
         identifier ??= this._identifier;
 
         if (! identifier) return null;
-
-        this._connection.cancelRunning(this);
 
         this._response =  this._connection.spost(
             this._queryString(identifier) + '/show',
             this.bodyParameters,
         );
 
-        this._connection.removeRequest(this);
-
-        let item;
-
-        if (this._response.data) {
-            item = this.constructor.fromJson(this._response.data);
-        }
-
-        const responseEventsHandler = this._createResponseEventsHandler();
-        responseEventsHandler.setOnSuccessData(item);
-        // await responseEventsHandler.triggerResponseEvents(this._response);
-
-        this.clearAllCallbacks();
-
-        if(config?.onlyConfig){
-          return this._response
-        }
-
-        return item;
+        return this._response
     }
 
     /**
@@ -382,33 +338,12 @@ export class Model extends Request {
      * @returns {this} The created model.
      */
     sstore (extraData = {}) {
-        const config = this._connection.getConfig();
-        this._connection.cancelRunning(this);
-
         this._response =  this._connection.spost(
             this._queryString(),
             { ...this._attributes.toJson(this), ...this._mediaCollections.toJson(this), ...extraData },
         );
 
-        this._connection.removeRequest(this);
-
-        let item;
-
-        if (this._response.data) {
-            item = this.constructor.fromJson(this._response.data);
-        }
-
-        const responseEventsHandler = this._createResponseEventsHandler();
-        responseEventsHandler.setOnSuccessData(item);
-        // await responseEventsHandler.triggerResponseEvents(this._response);
-
-        this.clearAllCallbacks();
-
-        if(config?.onlyConfig){
-          return this._response
-        }
-
-        return item;
+        return this._response
     }
 
     /**
@@ -419,33 +354,12 @@ export class Model extends Request {
      * @returns {this} The updated model.
      */
     supdate (extraData = {}) {
-        const config = this._connection.getConfig();
-        this._connection.cancelRunning(this);
-
         this._response =  this._connection.sput(
             this._queryString(this._identifier),
             { ...this._attributes.toJson(this), ...this._mediaCollections.toJson(this), ...extraData },
         );
-
-        this._connection.removeRequest(this);
-
-        let item;
-
-        if (this._response.data) {
-            item = this.constructor.fromJson(this._response.data);
-        }
-
-        const responseEventsHandler = this._createResponseEventsHandler();
-        responseEventsHandler.setOnSuccessData(item);
-        // await responseEventsHandler.triggerResponseEvents(this._response);
-
-        this.clearAllCallbacks();
-
-        if(config?.onlyConfig){
-          return this._response
-        }
-
-        return item;
+        
+        return this._response
     }
 
     /**
