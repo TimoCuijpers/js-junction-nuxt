@@ -20,7 +20,11 @@ const filterMixin = {
     order (input, direction = 'asc') {
         // If a single column name (string) is specified
         if (typeof input === 'string') {
-            this._filters.order.add(_.snakeCase(input), direction);
+            input = input
+              .split('.')
+              .map(segment => _.snakeCase(segment))
+              .join('.');
+            this._filters.order.add(input, direction);
         }
 
         // If there is an array input
@@ -28,14 +32,27 @@ const filterMixin = {
             input.forEach(item => {
                 // If the item is a string (single column name)
                 if (typeof item === 'string') {
-                    this._filters.order.add(_.snakeCase(input), 'asc');
+                    input = input
+                        .split('.')
+                        .map(segment => _.snakeCase(segment))
+                        .join('.');
+                    this._filters.order.add(input, 'asc');
                 }
 
                 // If the item is an array ([column name, direction])
                 else if (Array.isArray(item)) {
-                    const [column, direction = 'asc'] = item; // default value for dir is 'asc' if not specified
-
-                    this._filters.order.add(_.snakeCase(column), direction);
+                    let [column, direction = 'asc'] = item; // default value for dir is 'asc' if not specified
+                    if (column && direction) {
+                        if (column.includes('.')) {
+                            column = column
+                              .split('.')
+                              .map(segment => _.snakeCase(segment))
+                              .join('.');
+                        } else {
+                            column = _.snakeCase(column);
+                        }
+                        this._filters.order.add(column, direction);
+                    }
                 }
             });
         }
