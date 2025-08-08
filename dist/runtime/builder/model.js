@@ -5,10 +5,10 @@ import Counts from './properties/counts.js';
 import Relations from './properties/relations.js';
 import MediaCollections from './properties/mediaCollections.js';
 import Request from '../request.js';
-import { useNuxtApp } from '#app';
-import Api from "../api.js";
+// import { useNuxtApp } from '#app';
+// import Api from "../api.js";
 
-const api = useNuxtApp().$api || new Api();
+// const api = useNuxtApp().$api || new Api();
 
 export class Model extends Request {
     constructor (defaults = {}) {
@@ -20,7 +20,7 @@ export class Model extends Request {
         this._relations = new Relations(this);
         this._mediaCollections = new MediaCollections(this);
 
-        this.setApi(api);
+        // this.setApi(api);
         this.fill(defaults);
     }
 
